@@ -1,11 +1,22 @@
 import UIKit
 
 class PhotosViewController: UIViewController {
-    @IBOutlet var imageView: UIImageView!
+    var imageView: UIImageView!
     var store: PhotoStore!
+    
+    func setup() {
+        imageView = UIImageView()
+        view.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         store.fetchRecentPhotos {
             (photosResult) -> Void in
             

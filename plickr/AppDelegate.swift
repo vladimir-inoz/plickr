@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let rootViewController = window!.rootViewController as! UINavigationController
-        let photosViewController = rootViewController.topViewController as! PhotosViewController
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let photosViewController = PhotosViewController()
         photosViewController.store = PhotoStore()
+        window?.rootViewController = photosViewController
         return true
     }
 
