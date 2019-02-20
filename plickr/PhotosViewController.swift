@@ -2,7 +2,20 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     var imageView: UIImageView!
-    var store: PhotoStore!
+    private let store: PhotoStore
+    private let method: Method
+    
+    init(method: Method, store: PhotoStore) {
+        self.method = method
+        self.store = store
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.method = .interestingPhotos
+        self.store = PhotoStore()
+        super.init(coder: aDecoder)
+    }
     
     func setup() {
         imageView = UIImageView()
@@ -12,13 +25,24 @@ class PhotosViewController: UIViewController {
         imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        
+        let tabTitle: String
+        switch method {
+        case .interestingPhotos:
+            tabTitle = "Interesting"
+        case .recentPhotos:
+            tabTitle = "Recent"
+        }
+        tabBarItem = UITabBarItem(title: tabTitle, image: nil, selectedImage: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        store.fetchRecentPhotos {
-            (photosResult) -> Void in
+        
+        
+        let handleResult = {
+            (photosResult: PhotosResult) -> Void in
             
             switch photosResult {
             case let .success(photos):
@@ -29,6 +53,13 @@ class PhotosViewController: UIViewController {
             case let .failure(error):
                 print("Error fetching interesting photos: \(error)")
             }
+        }
+        
+        switch method {
+        case .interestingPhotos:
+            store.fetchInterestingPhotos(completion: handleResult)
+        case .recentPhotos:
+            store.fetchRecentPhotos(completion: handleResult)
         }
     }
     

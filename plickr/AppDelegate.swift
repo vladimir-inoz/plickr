@@ -17,9 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let photosViewController = PhotosViewController()
-        photosViewController.store = PhotoStore()
-        window?.rootViewController = photosViewController
+        let photoStore = PhotoStore()
+        let interestingViewController = PhotosViewController(method: .interestingPhotos, store: photoStore)
+        let recentViewController = PhotosViewController(method: .recentPhotos, store: photoStore)
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [interestingViewController, recentViewController]
+        window?.rootViewController = tabBarController
         return true
     }
 
