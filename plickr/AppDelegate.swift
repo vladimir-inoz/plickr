@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let photoStore = PhotoStore()
         let interestingViewController = PhotosViewController(method: .interestingPhotos, store: photoStore)
+        interestingViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         let recentViewController = PhotosViewController(method: .recentPhotos, store: photoStore)
+        recentViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [interestingViewController, recentViewController]
         window?.rootViewController = tabBarController

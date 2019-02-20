@@ -25,15 +25,6 @@ class PhotosViewController: UIViewController {
         imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
-        
-        let tabTitle: String
-        switch method {
-        case .interestingPhotos:
-            tabTitle = "Interesting"
-        case .recentPhotos:
-            tabTitle = "Recent"
-        }
-        tabBarItem = UITabBarItem(title: tabTitle, image: nil, selectedImage: nil)
     }
     
     override func viewDidLoad() {
