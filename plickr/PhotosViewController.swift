@@ -1,7 +1,8 @@
 import UIKit
 
 class PhotosViewController: UIViewController {
-    var imageView: UIImageView!
+    private var collectionView: UICollectionView!
+    private let dataSource = PhotoDataSource()
     private let store: PhotoStore
     private let method: Method
     
@@ -18,13 +19,21 @@ class PhotosViewController: UIViewController {
     }
     
     func setup() {
-        imageView = UIImageView()
-        view.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        imageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 90.0, height: 90.0)
+        flowLayout.minimumLineSpacing = 10.0
+        flowLayout.minimumInteritemSpacing = 10.0
+        flowLayout.sectionInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.dataSource = dataSource
+        collectionView.backgroundColor = UIColor.white
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
     }
     
     override func viewDidLoad() {
@@ -38,12 +47,13 @@ class PhotosViewController: UIViewController {
             switch photosResult {
             case let .success(photos):
                 print("Successfully downloaded \(photos.count) photos")
-                if let firstPhoto = photos.first {
-                    self.updateImageView(for: firstPhoto)
-                }
+                self.dataSource.photos = photos
             case let .failure(error):
                 print("Error fetching interesting photos: \(error)")
+                self.dataSource.photos.removeAll()
             }
+            
+            self.collectionView.reloadSections(IndexSet(integer: 0))
         }
         
         switch method {
@@ -51,19 +61,6 @@ class PhotosViewController: UIViewController {
             store.fetchInterestingPhotos(completion: handleResult)
         case .recentPhotos:
             store.fetchRecentPhotos(completion: handleResult)
-        }
-    }
-    
-    func updateImageView(for photo: Photo) {
-        store.fetchImage(for: photo) {
-            (imageResult) -> Void in
-            
-            switch imageResult {
-            case let .success(image):
-                self.imageView.image = image
-            case let .failure(error):
-                print("Error downloading image: \(error.localizedDescription)")
-            }
         }
     }
 }

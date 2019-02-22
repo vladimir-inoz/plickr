@@ -14,6 +14,7 @@ enum PhotosResult {
     case failure(Error)
 }
 
+/// `PhotoStore` class is responsible for downloading images from flickr with URLSession using `FlickrAPI` struct
 class PhotoStore {
     private let session: URLSession = {
        let config = URLSessionConfiguration.default
