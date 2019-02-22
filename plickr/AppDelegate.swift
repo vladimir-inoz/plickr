@@ -1,12 +1,5 @@
-//
-//  AppDelegate.swift
-//  plickr
-//
-//  Created by User on 19/02/2019.
-//  Copyright © 2019 test. All rights reserved.
-//
-
 import UIKit
+import FetchPhotos
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

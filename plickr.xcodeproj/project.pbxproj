@@ -7,17 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE186623221BF3A800E5803D /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186622221BF3A800E5803D /* PhotoStore.swift */; };
-		CE186625221BFD7700E5803D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186624221BFD7700E5803D /* Photo.swift */; };
-		CE186627221D496A00E5803D /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186626221D496A00E5803D /* Secret.swift */; };
-		CE186629221EB99E00E5803D /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186628221EB99E00E5803D /* PhotoDataSource.swift */; };
-		CE18662B221FCC3D00E5803D /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18662A221FCC3D00E5803D /* PhotoCollectionViewCell.swift */; };
+		CE18663C221FD4C100E5803D /* FetchPhotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE186633221FD4C100E5803D /* FetchPhotos.framework */; };
+		CE186643221FD4C100E5803D /* FetchPhotosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186642221FD4C100E5803D /* FetchPhotosTests.swift */; };
+		CE186645221FD4C100E5803D /* FetchPhotos.h in Headers */ = {isa = PBXBuildFile; fileRef = CE186635221FD4C100E5803D /* FetchPhotos.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE186648221FD4C100E5803D /* FetchPhotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE186633221FD4C100E5803D /* FetchPhotos.framework */; };
+		CE186649221FD4C100E5803D /* FetchPhotos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE186633221FD4C100E5803D /* FetchPhotos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE186651221FD4CD00E5803D /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186622221BF3A800E5803D /* PhotoStore.swift */; };
+		CE186652221FD4D200E5803D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186624221BFD7700E5803D /* Photo.swift */; };
+		CE186653221FD54F00E5803D /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C66221BE90B00DA9779 /* FlickrAPI.swift */; };
+		CE186654221FD57000E5803D /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186626221D496A00E5803D /* Secret.swift */; };
+		CE186655221FD60900E5803D /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186628221EB99E00E5803D /* PhotoDataSource.swift */; };
+		CE186656221FD61200E5803D /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18662A221FCC3D00E5803D /* PhotoCollectionViewCell.swift */; };
 		CE6C7C53221BDE0A00DA9779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */; };
 		CE6C7C5A221BDE1B00DA9779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */; };
 		CE6C7C5D221BDE1C00DA9779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */; };
 		CE6C7C65221BE0DE00DA9779 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C64221BE0DE00DA9779 /* PhotosViewController.swift */; };
-		CE6C7C67221BE90B00DA9779 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C66221BE90B00DA9779 /* FlickrAPI.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE18663D221FD4C100E5803D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE6C7C47221BDE0A00DA9779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE186632221FD4C100E5803D;
+			remoteInfo = FetchPhotos;
+		};
+		CE18663F221FD4C100E5803D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE6C7C47221BDE0A00DA9779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE6C7C4E221BDE0A00DA9779;
+			remoteInfo = plickr;
+		};
+		CE186646221FD4C100E5803D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE6C7C47221BDE0A00DA9779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE186632221FD4C100E5803D;
+			remoteInfo = FetchPhotos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE18664D221FD4C100E5803D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE186649221FD4C100E5803D /* FetchPhotos.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE186622221BF3A800E5803D /* PhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
@@ -25,6 +68,12 @@
 		CE186626221D496A00E5803D /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		CE186628221EB99E00E5803D /* PhotoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
 		CE18662A221FCC3D00E5803D /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE186633221FD4C100E5803D /* FetchPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FetchPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE186635221FD4C100E5803D /* FetchPhotos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FetchPhotos.h; sourceTree = "<group>"; };
+		CE186636221FD4C100E5803D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE18663B221FD4C100E5803D /* FetchPhotosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchPhotosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE186642221FD4C100E5803D /* FetchPhotosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotosTests.swift; sourceTree = "<group>"; };
+		CE186644221FD4C100E5803D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE6C7C4F221BDE0A00DA9779 /* plickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = plickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,20 +84,60 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CE6C7C4C221BDE0A00DA9779 /* Frameworks */ = {
+		CE186630221FD4C100E5803D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE186638221FD4C100E5803D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE18663C221FD4C100E5803D /* FetchPhotos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE6C7C4C221BDE0A00DA9779 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE186648221FD4C100E5803D /* FetchPhotos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE186634221FD4C100E5803D /* FetchPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				CE186635221FD4C100E5803D /* FetchPhotos.h */,
+				CE186622221BF3A800E5803D /* PhotoStore.swift */,
+				CE6C7C66221BE90B00DA9779 /* FlickrAPI.swift */,
+				CE186624221BFD7700E5803D /* Photo.swift */,
+				CE186626221D496A00E5803D /* Secret.swift */,
+				CE186636221FD4C100E5803D /* Info.plist */,
+			);
+			path = FetchPhotos;
+			sourceTree = "<group>";
+		};
+		CE186641221FD4C100E5803D /* FetchPhotosTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE186642221FD4C100E5803D /* FetchPhotosTests.swift */,
+				CE186644221FD4C100E5803D /* Info.plist */,
+			);
+			path = FetchPhotosTests;
+			sourceTree = "<group>";
+		};
 		CE6C7C46221BDE0A00DA9779 = {
 			isa = PBXGroup;
 			children = (
 				CE6C7C51221BDE0A00DA9779 /* plickr */,
+				CE186634221FD4C100E5803D /* FetchPhotos */,
+				CE186641221FD4C100E5803D /* FetchPhotosTests */,
 				CE6C7C50221BDE0A00DA9779 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				CE6C7C4F221BDE0A00DA9779 /* plickr.app */,
+				CE186633221FD4C100E5803D /* FetchPhotos.framework */,
+				CE18663B221FD4C100E5803D /* FetchPhotosTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,11 +158,7 @@
 				CE6C7C64221BE0DE00DA9779 /* PhotosViewController.swift */,
 				CE18662A221FCC3D00E5803D /* PhotoCollectionViewCell.swift */,
 				CE186628221EB99E00E5803D /* PhotoDataSource.swift */,
-				CE186626221D496A00E5803D /* Secret.swift */,
 				CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */,
-				CE6C7C66221BE90B00DA9779 /* FlickrAPI.swift */,
-				CE186622221BF3A800E5803D /* PhotoStore.swift */,
-				CE186624221BFD7700E5803D /* Photo.swift */,
 				CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */,
 				CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */,
 				CE6C7C5E221BDE1C00DA9779 /* Info.plist */,
@@ -81,7 +168,55 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		CE18662E221FD4C100E5803D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE186645221FD4C100E5803D /* FetchPhotos.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		CE186632221FD4C100E5803D /* FetchPhotos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE18664A221FD4C100E5803D /* Build configuration list for PBXNativeTarget "FetchPhotos" */;
+			buildPhases = (
+				CE18662E221FD4C100E5803D /* Headers */,
+				CE18662F221FD4C100E5803D /* Sources */,
+				CE186630221FD4C100E5803D /* Frameworks */,
+				CE186631221FD4C100E5803D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FetchPhotos;
+			productName = FetchPhotos;
+			productReference = CE186633221FD4C100E5803D /* FetchPhotos.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CE18663A221FD4C100E5803D /* FetchPhotosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE18664E221FD4C100E5803D /* Build configuration list for PBXNativeTarget "FetchPhotosTests" */;
+			buildPhases = (
+				CE186637221FD4C100E5803D /* Sources */,
+				CE186638221FD4C100E5803D /* Frameworks */,
+				CE186639221FD4C100E5803D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE18663E221FD4C100E5803D /* PBXTargetDependency */,
+				CE186640221FD4C100E5803D /* PBXTargetDependency */,
+			);
+			name = FetchPhotosTests;
+			productName = FetchPhotosTests;
+			productReference = CE18663B221FD4C100E5803D /* FetchPhotosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE6C7C4E221BDE0A00DA9779 /* plickr */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE6C7C61221BDE1C00DA9779 /* Build configuration list for PBXNativeTarget "plickr" */;
@@ -89,10 +224,12 @@
 				CE6C7C4B221BDE0A00DA9779 /* Sources */,
 				CE6C7C4C221BDE0A00DA9779 /* Frameworks */,
 				CE6C7C4D221BDE0A00DA9779 /* Resources */,
+				CE18664D221FD4C100E5803D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CE186647221FD4C100E5803D /* PBXTargetDependency */,
 			);
 			name = plickr;
 			productName = plickr;
@@ -109,6 +246,13 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = test;
 				TargetAttributes = {
+					CE186632221FD4C100E5803D = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					CE18663A221FD4C100E5803D = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = CE6C7C4E221BDE0A00DA9779;
+					};
 					CE6C7C4E221BDE0A00DA9779 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -128,11 +272,27 @@
 			projectRoot = "";
 			targets = (
 				CE6C7C4E221BDE0A00DA9779 /* plickr */,
+				CE186632221FD4C100E5803D /* FetchPhotos */,
+				CE18663A221FD4C100E5803D /* FetchPhotosTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE186631221FD4C100E5803D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE186639221FD4C100E5803D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE6C7C4D221BDE0A00DA9779 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -145,22 +305,55 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE18662F221FD4C100E5803D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE186652221FD4D200E5803D /* Photo.swift in Sources */,
+				CE186651221FD4CD00E5803D /* PhotoStore.swift in Sources */,
+				CE186653221FD54F00E5803D /* FlickrAPI.swift in Sources */,
+				CE186654221FD57000E5803D /* Secret.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE186637221FD4C100E5803D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE186643221FD4C100E5803D /* FetchPhotosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE6C7C4B221BDE0A00DA9779 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE6C7C67221BE90B00DA9779 /* FlickrAPI.swift in Sources */,
-				CE18662B221FCC3D00E5803D /* PhotoCollectionViewCell.swift in Sources */,
-				CE186629221EB99E00E5803D /* PhotoDataSource.swift in Sources */,
-				CE186627221D496A00E5803D /* Secret.swift in Sources */,
 				CE6C7C53221BDE0A00DA9779 /* AppDelegate.swift in Sources */,
-				CE186623221BF3A800E5803D /* PhotoStore.swift in Sources */,
 				CE6C7C65221BE0DE00DA9779 /* PhotosViewController.swift in Sources */,
-				CE186625221BFD7700E5803D /* Photo.swift in Sources */,
+				CE186656221FD61200E5803D /* PhotoCollectionViewCell.swift in Sources */,
+				CE186655221FD60900E5803D /* PhotoDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE18663E221FD4C100E5803D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE186632221FD4C100E5803D /* FetchPhotos */;
+			targetProxy = CE18663D221FD4C100E5803D /* PBXContainerItemProxy */;
+		};
+		CE186640221FD4C100E5803D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE6C7C4E221BDE0A00DA9779 /* plickr */;
+			targetProxy = CE18663F221FD4C100E5803D /* PBXContainerItemProxy */;
+		};
+		CE186647221FD4C100E5803D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE186632221FD4C100E5803D /* FetchPhotos */;
+			targetProxy = CE186646221FD4C100E5803D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */ = {
@@ -174,6 +367,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CE18664B221FD4C100E5803D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FetchPhotos/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.learn.FetchPhotos;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CE18664C221FD4C100E5803D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FetchPhotos/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.learn.FetchPhotos;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CE18664F221FD4C100E5803D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FetchPhotosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.learn.FetchPhotosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/plickr.app/plickr";
+			};
+			name = Debug;
+		};
+		CE186650221FD4C100E5803D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FetchPhotosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.learn.FetchPhotosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/plickr.app/plickr";
+			};
+			name = Release;
+		};
 		CE6C7C5F221BDE1C00DA9779 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -293,6 +578,7 @@
 		CE6C7C62221BDE1C00DA9779 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = plickr/Info.plist;
@@ -310,6 +596,7 @@
 		CE6C7C63221BDE1C00DA9779 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = plickr/Info.plist;
@@ -327,6 +614,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE18664A221FD4C100E5803D /* Build configuration list for PBXNativeTarget "FetchPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE18664B221FD4C100E5803D /* Debug */,
+				CE18664C221FD4C100E5803D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE18664E221FD4C100E5803D /* Build configuration list for PBXNativeTarget "FetchPhotosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE18664F221FD4C100E5803D /* Debug */,
+				CE186650221FD4C100E5803D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE6C7C4A221BDE0A00DA9779 /* Build configuration list for PBXProject "plickr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

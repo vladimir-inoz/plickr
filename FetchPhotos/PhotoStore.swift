@@ -1,27 +1,29 @@
 import UIKit
 
-enum ImageResult {
+public enum ImageResult {
     case success(UIImage)
     case failure(Error)
 }
 
-enum PhotoError: Error {
+public enum PhotoError: Error {
     case imageCreationError
 }
 
-enum PhotosResult {
+public enum PhotosResult {
     case success([Photo])
     case failure(Error)
 }
 
 /// `PhotoStore` class is responsible for downloading images from flickr with URLSession using `FlickrAPI` struct
-class PhotoStore {
+public class PhotoStore {
+    public init() {}
+    
     private let session: URLSession = {
        let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
-    func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
+    public func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
         let request = URLRequest(url: photo.remoteURL)
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
@@ -55,11 +57,11 @@ class PhotoStore {
         return FlickrAPI.photos(fromJSON: jsonData)
     }
     
-    func fetchInterestingPhotos(completion: @escaping (PhotosResult) -> Void) {
+    public func fetchInterestingPhotos(completion: @escaping (PhotosResult) -> Void) {
         fetch(url: FlickrAPI.interestingPhotosURL, completion: completion)
     }
     
-    func fetchRecentPhotos(completion: @escaping (PhotosResult) -> Void) {
+    public func fetchRecentPhotos(completion: @escaping (PhotosResult) -> Void) {
         fetch(url: FlickrAPI.recentPhotosURL, completion: completion)
     }
     

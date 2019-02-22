@@ -1,12 +1,13 @@
 import UIKit
+import FetchPhotos
 
 class PhotosViewController: UIViewController {
     private var collectionView: UICollectionView!
     private let dataSource = PhotoDataSource()
     private let store: PhotoStore
-    private let method: Method
+    private let method: FlickrAPI.Method
     
-    init(method: Method, store: PhotoStore) {
+    init(method: FlickrAPI.Method, store: PhotoStore) {
         self.method = method
         self.store = store
         super.init(nibName: nil, bundle: nil)

@@ -1,16 +1,16 @@
 import Foundation
 
-enum Method: String {
-    case interestingPhotos = "flickr.interestingness.getList"
-    case recentPhotos = "flickr.photos.getRecent"
-}
-
-enum FlickrError: Error {
-    case invalidJSONData
-}
-
 /// Struct responsible for creating query urls and parsing json responses
-struct FlickrAPI {
+public struct FlickrAPI {
+    public enum Method: String {
+        case interestingPhotos = "flickr.interestingness.getList"
+        case recentPhotos = "flickr.photos.getRecent"
+    }
+    
+    public enum FlickrError: Error {
+        case invalidJSONData
+    }
+    
     private init() {}
     private static let baseURLString = "https://api.flickr.com/services/rest"
     private static let dateFormatter: DateFormatter = {
@@ -60,7 +60,7 @@ struct FlickrAPI {
         return flickrURL(method: .recentPhotos, parameters: ["extras": "url_h,date_taken"])
     }
     
-    static func photos(fromJSON data: Data) -> PhotosResult {
+    public static func photos(fromJSON data: Data) -> PhotosResult {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
             guard

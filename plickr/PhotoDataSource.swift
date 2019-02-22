@@ -1,4 +1,5 @@
 import UIKit
+import FetchPhotos
 
 class PhotoDataSource: NSObject, UICollectionViewDataSource {
     var photos = [Photo]()

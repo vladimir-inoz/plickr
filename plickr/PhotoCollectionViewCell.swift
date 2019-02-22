@@ -22,6 +22,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        //show up spinner
+        update(with: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
