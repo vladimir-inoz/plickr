@@ -17,15 +17,34 @@ public enum PhotosResult {
 /// `PhotoStore` class is responsible for downloading images from flickr with URLSession using `FlickrAPI` struct
 public class PhotoStore {
     public init() {}
-    
+    private let imageStore = ImageStore()
     internal var client: HTTPClientProtocol = HTTPClient()
     
+    /// Fetch image from local cache (if it already exists)
+    /// or download it via network
+    ///
+    /// - Parameters:
+    ///   - photo: photo object
+    ///   - completion: completion closure
     public func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
+        //trying to fetch image from local cache
+        if let image = imageStore.image(forKey: photo.photoID) {
+            OperationQueue.main.addOperation {
+                completion(.success(image))
+            }
+            return
+        }
+        //not found image in local cache, download it
         let request = URLRequest(url: photo.remoteURL)
         client.getData(with: request) {
             (data, response, error) -> Void in
             let result = self.dataToImage(data: data, error: error)
-            DispatchQueue.main.async {
+            
+            if case let .success(image) = result {
+                self.imageStore.setImage(image, forKey: photo.photoID)
+            }
+            
+            OperationQueue.main.addOperation {
                 completion(result)
             }
         }

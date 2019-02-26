@@ -2,10 +2,10 @@ import UIKit
 import FetchPhotos
 
 class PhotoDataSource: NSObject, UICollectionViewDataSource {
-    var photos = [Photo]()
+    var presenter: PhotosViewPresenterProtocol! = nil
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return presenter.photosCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

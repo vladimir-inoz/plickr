@@ -11,10 +11,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let photoStore = PhotoStore()
-        let interestingViewController = PhotosViewController(method: .interestingPhotos, store: photoStore)
+        
+        let interestingViewController = PhotosViewController()
+        let interestingViewPresenter = PhotosViewPresenter(view: interestingViewController, store: photoStore, method: .interestingPhotos)
+        interestingViewController.presenter = interestingViewPresenter
         interestingViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
-        let recentViewController = PhotosViewController(method: .recentPhotos, store: photoStore)
+        
+        let recentViewController = PhotosViewController()
+        let recentViewPresenter = PhotosViewPresenter(view: interestingViewController, store: photoStore, method: .recentPhotos)
+        recentViewController.presenter = recentViewPresenter
         recentViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+        
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [interestingViewController, recentViewController]
         window?.rootViewController = tabBarController

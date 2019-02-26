@@ -1,22 +1,13 @@
 import UIKit
 import FetchPhotos
 
-class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosViewProtocol {
     private var collectionView: UICollectionView!
     private let dataSource = PhotoDataSource()
-    private let store: PhotoStore
-    private let method: FlickrAPI.Method
-    
-    init(method: FlickrAPI.Method, store: PhotoStore) {
-        self.method = method
-        self.store = store
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.method = .interestingPhotos
-        self.store = PhotoStore()
-        super.init(coder: aDecoder)
+    var presenter: PhotosViewPresenterProtocol! = nil {
+        didSet {
+            dataSource.presenter = presenter
+        }
     }
     
     func setup() {
@@ -28,6 +19,7 @@ class PhotosViewController: UIViewController {
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.dataSource = dataSource
+        collectionView.delegate = self
         collectionView.backgroundColor = UIColor.white
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,28 +32,25 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
-        
-        let handleResult = {
-            (photosResult: PhotosResult) -> Void in
-            
-            switch photosResult {
-            case let .success(photos):
-                print("Successfully downloaded \(photos.count) photos")
-                self.dataSource.photos = photos
-            case let .failure(error):
-                print("Error fetching interesting photos: \(error)")
-                self.dataSource.photos.removeAll()
+        presenter.reloadPhotosFromServer()
+    }
+    
+    //MARK: - Photos View protocol
+    
+    func reload() {
+        collectionView.reloadSections(IndexSet(integer: 0))
+    }
+    
+    //MARK: - Collection view delegate
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        presenter.fetchImageForIndex(index: indexPath.row) {
+            (indexRow, photoResult) in
+            let indexPath = IndexPath(item: indexRow, section: 0)
+            if case let .success(image) = photoResult,
+                let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
+                cell.update(with: image)
             }
-            
-            self.collectionView.reloadSections(IndexSet(integer: 0))
-        }
-        
-        switch method {
-        case .interestingPhotos:
-            store.fetchInterestingPhotos(completion: handleResult)
-        case .recentPhotos:
-            store.fetchRecentPhotos(completion: handleResult)
         }
     }
 }
