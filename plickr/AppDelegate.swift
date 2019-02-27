@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         interestingViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         
         let recentViewController = PhotosViewController()
-        let recentViewPresenter = PhotosViewPresenter(view: interestingViewController, store: photoStore, method: .recentPhotos)
+        let recentViewPresenter = PhotosViewPresenter(view: recentViewController, store: photoStore, method: .recentPhotos)
         recentViewController.presenter = recentViewPresenter
         recentViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
         
