@@ -1,7 +1,20 @@
 import UIKit
 
+public protocol SwipeImageViewPresenterProtocol: class {
+    func nextImage() -> UIImage?
+    func previousImage() -> UIImage?
+    func hasNextImage() -> Bool
+    func hasPreviousImage() -> Bool
+}
+
+public protocol SwipeImageView: class {
+    
+}
+
 public class SwipeImageViewController: UIViewController {
+    private var previousImageView: UIImageView!
     private var imageView: UIImageView!
+    private var nextImageView: UIImageView!
     
     private func setup() {
         imageView = UIImageView()

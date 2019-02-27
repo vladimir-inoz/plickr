@@ -1,4 +1,5 @@
 import Foundation
+import UIComponents
 import FetchPhotos
 
 class PhotosViewPresenter: PhotosViewPresenterProtocol {
@@ -43,7 +44,7 @@ class PhotosViewPresenter: PhotosViewPresenterProtocol {
         }
     }
     
-    func fetchImageForIndex(index: Int, completion: @escaping (Int, ImageResult) -> Void) {
+    func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void) {
         let photo = photos[index]
         store.fetchImage(for: photo) {
             imageResult in
@@ -52,7 +53,11 @@ class PhotosViewPresenter: PhotosViewPresenterProtocol {
                 return
             }
             
-            completion(actualPhotoIndex, imageResult)
+            if case let .success(image) = imageResult {
+                completion(actualPhotoIndex, image)
+            } else {
+                completion(actualPhotoIndex, nil)
+            }
         }
     }
 }
