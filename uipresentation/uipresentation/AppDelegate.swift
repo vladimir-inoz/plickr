@@ -11,18 +11,23 @@ extension UIColor {
 }
 
 class TestPhotoPresenter: PhotosViewPresenterProtocol {
-    private let dummyImage: UIImage = {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 50.0, height: 50.0))
-        let image = renderer.image { (context) in
-            UIColor.randomColor().setFill()
-            context.fill(CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+    /// generating dummy images filled with random coloe
+    private let dummyImages: [UIImage] = {
+        let range = 0...40
+        let images = range.map { _ -> UIImage in
+            let renderer = UIGraphicsImageRenderer(size: CGSize(width: 50.0, height: 50.0))
+            let image = renderer.image { (context) in
+                UIColor.randomColor().setFill()
+                context.fill(CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+            }
+            return image
         }
-        return image
+        return images
     }()
     
     var photosCount: Int {
         get {
-            return 40
+            return dummyImages.count
         }
     }
     
@@ -31,7 +36,7 @@ class TestPhotoPresenter: PhotosViewPresenterProtocol {
     }
     
     func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void) {
-        completion(index, dummyImage)
+        completion(index, dummyImages[index])
     }
 }
 

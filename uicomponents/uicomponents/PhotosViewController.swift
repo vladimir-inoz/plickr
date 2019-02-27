@@ -61,9 +61,8 @@ public class PhotosViewController: UIViewController, UICollectionViewDelegate, P
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.fetchImageForIndex(index: indexPath.row) {
             (indexRow, photo) in
-            let photoIndexPath = IndexPath(item: indexRow, section: 0)
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: photoIndexPath) as? PhotoCollectionViewCell {
-                cell.setImage(image: photo)
+            if let photoCell = cell as? PhotoCollectionViewCell {
+                photoCell.setImage(image: photo)
             }
         }
     }
