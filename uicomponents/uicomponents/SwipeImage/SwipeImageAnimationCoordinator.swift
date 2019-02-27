@@ -65,6 +65,8 @@ final class SwipeImageAnimationCoordinator {
         //add completion to only first animator
         animators.first?.addCompletion {
             [unowned self] (position) -> Void in
+            //calling delegate
+            self.delegate?.coordinator(self, finishedTransitionWithDirection: self.initialAnimationDirection)
             //nulling directions
             self.initialAnimationDirection = .undefined
             //erasing progress when interrupted
@@ -153,6 +155,7 @@ final class SwipeImageAnimationCoordinator {
         switch gestureState {
         case .began:
             initialAnimationDirection = AnimationDirection(fromVelocity: velocity)
+            delegate?.coordinator(self, beganTransitionWithDirection: initialAnimationDirection)
             startInteractiveTransition(with: initialAnimationDirection, duration: 1.0)
         case .changed:
             updateInteractiveTransition(translation: translation, velocity: velocity)

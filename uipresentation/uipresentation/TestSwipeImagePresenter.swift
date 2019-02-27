@@ -2,7 +2,7 @@ import UIComponents
 
 class TestSwipeImagePresenter: SwipeImageViewPresenterProtocol {
     func nextImage() -> UIImage? {
-        return nil
+        return Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0))
     }
     
     func currentImage() -> UIImage? {
@@ -10,15 +10,15 @@ class TestSwipeImagePresenter: SwipeImageViewPresenterProtocol {
     }
     
     func previousImage() -> UIImage? {
-        return nil
+        return Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0))
     }
     
     func hasNextImage() -> Bool {
-        return false
+        return true
     }
     
     func hasPreviousImage() -> Bool {
-        return false
+        return true
     }
     
     

@@ -20,18 +20,38 @@ public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoor
     private var coordinator: SwipeImageAnimationCoordinator!
     public var presenter: SwipeImageViewPresenterProtocol!
     
+    private func rearrageImageViews() {
+        imageView.frame = view.bounds
+        previousImageView.frame = imageView.frame.offsetBy(dx: -view.bounds.width, dy: 0.0)
+        nextImageView.frame = imageView.frame.offsetBy(dx: view.bounds.width, dy: 0.0)
+    }
+    
     private func setup() {
         imageView = UIImageView()
         imageView.image = presenter.currentImage()
+        imageView.tag = 0
         imageView.isUserInteractionEnabled = true
         view.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        imageView.frame = view.bounds
+        
+        previousImageView = UIImageView()
+        if presenter.hasPreviousImage() {
+            previousImageView.image = presenter.previousImage()
+        }
+        previousImageView.tag = 1
+        view.addSubview(previousImageView)
+        previousImageView.frame = imageView.frame.offsetBy(dx: -view.bounds.width, dy: 0.0)
+        
+        nextImageView = UIImageView()
+        if presenter.hasNextImage() {
+            nextImageView.image = presenter.nextImage()
+        }
+        previousImageView.tag = 2
+        view.addSubview(nextImageView)
+        nextImageView.frame = imageView.frame.offsetBy(dx: view.bounds.width, dy: 0.0)
+        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        imageView.addGestureRecognizer(panGestureRecognizer)
+        view.addGestureRecognizer(panGestureRecognizer)
         
         setupCoordinators()
     }
@@ -39,9 +59,13 @@ public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoor
     private func setupCoordinators() {
         let leftAnimation = { [unowned self] in
             self.imageView.frame = self.imageView.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
+            self.previousImageView.frame = self.previousImageView.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
+            self.nextImageView.frame = self.nextImageView.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
         }
         let rightAnimation = { [unowned self] in
             self.imageView.frame = self.imageView.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
+            self.previousImageView.frame = self.previousImageView.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
+            self.nextImageView.frame = self.nextImageView.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
         }
         let easeInTimingParameters = UICubicTimingParameters(animationCurve: .easeIn)
         let parameters = SwipeImageAnimationCoordinator.AnimationParameters(leftAnimation: leftAnimation, rightAnimation: rightAnimation, timingParameters: easeInTimingParameters)
@@ -64,7 +88,37 @@ public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoor
         
     }
     
-    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, finishedTransitionWithDirection: SwipeImageAnimationCoordinator.AnimationDirection) {
+    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, finishedTransitionWithDirection direction: SwipeImageAnimationCoordinator.AnimationDirection) {
+        let newCurrent: UIImageView
+        let newPrev: UIImageView
+        let newNext: UIImageView
+        //Depending on direction we rearrange image view and set corrent references to them
+        switch direction {
+        case .left:
+            newCurrent = previousImageView
+            newNext = imageView
+            newPrev = nextImageView
+            
+            imageView = newCurrent
+            nextImageView = newNext
+            previousImageView = newPrev
+            
+            previousImageView.image = presenter.previousImage()
+        case .right:
+            newCurrent = nextImageView
+            newNext = previousImageView
+            newPrev = imageView
+            
+            imageView = newCurrent
+            nextImageView = newNext
+            previousImageView = newPrev
+            
+            nextImageView.image = presenter.nextImage()
+            break
+        case .undefined:
+            break
+        }
         
+        rearrageImageViews()
     }
 }
