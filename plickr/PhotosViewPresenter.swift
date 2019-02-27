@@ -1,22 +1,6 @@
 import Foundation
 import FetchPhotos
 
-protocol PhotosViewPresenterProtocol: class {
-    var photosCount: Int {get}
-    func reloadPhotosFromServer()
-    /// Asyncronously fetch image for index
-    ///
-    /// - Parameters:
-    ///   - index: index of photo
-    ///   - completion: new index of photo and photo result are returned in completion
-    func fetchImageForIndex(index: Int, completion: @escaping (Int, ImageResult) -> Void)
-}
-
-protocol PhotosViewProtocol: class {
-    /// Reload corresponding view
-    func reload()
-}
-
 class PhotosViewPresenter: PhotosViewPresenterProtocol {
     private let store: PhotoStore
     private let method: FlickrAPI.Method

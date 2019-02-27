@@ -23,7 +23,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         //show up spinner
-        update(with: nil)
+        setImage(image: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,15 +32,15 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        update(with: nil)
+        setImage(image: nil)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        update(with: nil)
+        setImage(image: nil)
     }
     
-    func update(with image: UIImage?) {
+    func setImage(image: UIImage?) {
         if let imageToDisplay = image {
             spinner.stopAnimating()
             imageView.image = imageToDisplay

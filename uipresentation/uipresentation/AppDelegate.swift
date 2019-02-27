@@ -1,6 +1,39 @@
 import UIKit
 import UIComponents
-import FetchPhotos
+
+extension UIColor {
+    static func randomColor() -> UIColor {
+        let red = CGFloat.random(in: 0...1)
+        let green = CGFloat.random(in: 0...1)
+        let blue = CGFloat.random(in: 0...1)
+        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+    }
+}
+
+class TestPhotoPresenter: PhotosViewPresenterProtocol {
+    private let dummyImage: UIImage = {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 50.0, height: 50.0))
+        let image = renderer.image { (context) in
+            UIColor.randomColor().setFill()
+            context.fill(CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+        }
+        return image
+    }()
+    
+    var photosCount: Int {
+        get {
+            return 40
+        }
+    }
+    
+    func reloadPhotosFromServer() {
+        //do nothing
+    }
+    
+    func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void) {
+        completion(index, dummyImage)
+    }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -11,20 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let photoStore = PhotoStore()
         
-        let interestingViewController = PhotosViewController()
-        let interestingViewPresenter = PhotosViewPresenter(view: interestingViewController, store: photoStore, method: .interestingPhotos)
-        interestingViewController.presenter = interestingViewPresenter
-        interestingViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        let photosVC = PhotosViewController()
+        let photosPresenter = TestPhotoPresenter()
+        photosVC.presenter = photosPresenter
+        photosVC.tabBarItem = UITabBarItem(title: "Photos", image: nil, selectedImage: nil)
         
-        let recentViewController = PhotosViewController()
-        let recentViewPresenter = PhotosViewPresenter(view: interestingViewController, store: photoStore, method: .recentPhotos)
-        recentViewController.presenter = recentViewPresenter
-        recentViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+        let imageVC = SwipeImageViewController()
+        imageVC.tabBarItem = UITabBarItem(title: "SwipeImage", image: nil, selectedImage: nil)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [interestingViewController, recentViewController]
+        tabBarController.viewControllers = [photosVC, imageVC]
         window?.rootViewController = tabBarController
         return true
     }

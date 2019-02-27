@@ -1,10 +1,25 @@
 import UIKit
-import FetchPhotos
 
-class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosViewProtocol {
+public protocol PhotosViewPresenterProtocol: class {
+    var photosCount: Int {get}
+    func reloadPhotosFromServer()
+    /// Asyncronously fetch image for index
+    ///
+    /// - Parameters:
+    ///   - index: index of photo
+    ///   - completion: new index of photo and photo result are returned in completion
+    func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void)
+}
+
+public protocol PhotosViewProtocol: class {
+    /// Reload corresponding view
+    func reload()
+}
+
+public class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosViewProtocol {
     private var collectionView: UICollectionView!
     private let dataSource = PhotoDataSource()
-    var presenter: PhotosViewPresenterProtocol! = nil {
+    public var presenter: PhotosViewPresenterProtocol! = nil {
         didSet {
             dataSource.presenter = presenter
         }
@@ -29,7 +44,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosVi
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setup()
         presenter.reloadPhotosFromServer()
@@ -37,19 +52,18 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosVi
     
     //MARK: - Photos View protocol
     
-    func reload() {
+    public func reload() {
         collectionView.reloadSections(IndexSet(integer: 0))
     }
     
     //MARK: - Collection view delegate
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.fetchImageForIndex(index: indexPath.row) {
-            (indexRow, photoResult) in
-            let indexPath = IndexPath(item: indexRow, section: 0)
-            if case let .success(image) = photoResult,
-                let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
-                cell.update(with: image)
+            (indexRow, photo) in
+            let photoIndexPath = IndexPath(item: indexRow, section: 0)
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: photoIndexPath) as? PhotoCollectionViewCell {
+                cell.setImage(image: photo)
             }
         }
     }
