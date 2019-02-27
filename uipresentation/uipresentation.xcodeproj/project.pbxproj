@@ -13,6 +13,7 @@
 		CE436C5D222660CD00F93028 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE436C5B222660CD00F93028 /* LaunchScreen.storyboard */; };
 		CE436C65222663CC00F93028 /* UIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE436C64222663CC00F93028 /* UIComponents.framework */; };
 		CE436C66222663CC00F93028 /* UIComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE436C64222663CC00F93028 /* UIComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE436C69222670B900F93028 /* TestPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE436C68222670B900F93028 /* TestPhotoPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		CE436C5C222660CD00F93028 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE436C5E222660CD00F93028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE436C64222663CC00F93028 /* UIComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE436C68222670B900F93028 /* TestPhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPhotoPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				CE436C52222660CC00F93028 /* AppDelegate.swift */,
+				CE436C68222670B900F93028 /* TestPhotoPresenter.swift */,
 				CE436C54222660CC00F93028 /* ViewController.swift */,
 				CE436C59222660CD00F93028 /* Assets.xcassets */,
 				CE436C5B222660CD00F93028 /* LaunchScreen.storyboard */,
@@ -153,6 +156,7 @@
 			files = (
 				CE436C55222660CC00F93028 /* ViewController.swift in Sources */,
 				CE436C53222660CC00F93028 /* AppDelegate.swift in Sources */,
+				CE436C69222670B900F93028 /* TestPhotoPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
