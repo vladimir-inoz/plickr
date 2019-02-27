@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         photosVC.tabBarItem = UITabBarItem(title: "Photos", image: nil, selectedImage: nil)
         
         let imageVC = SwipeImageViewController()
+        imageVC.presenter = TestSwipeImagePresenter()
         imageVC.tabBarItem = UITabBarItem(title: "SwipeImage", image: nil, selectedImage: nil)
         
         let tabBarController = UITabBarController()
