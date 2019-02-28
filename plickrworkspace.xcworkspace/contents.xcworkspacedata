@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:FlickrREST/FlickrREST.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:uicomponents/uicomponents.xcodeproj">
    </FileRef>
    <FileRef

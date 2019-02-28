@@ -12,10 +12,25 @@
 		CE436C53222660CC00F93028 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE436C52222660CC00F93028 /* AppDelegate.swift */; };
 		CE436C5A222660CD00F93028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE436C59222660CD00F93028 /* Assets.xcassets */; };
 		CE436C5D222660CD00F93028 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE436C5B222660CD00F93028 /* LaunchScreen.storyboard */; };
-		CE436C65222663CC00F93028 /* UIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE436C64222663CC00F93028 /* UIComponents.framework */; };
-		CE436C66222663CC00F93028 /* UIComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE436C64222663CC00F93028 /* UIComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE436C69222670B900F93028 /* TestPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE436C68222670B900F93028 /* TestPhotoPresenter.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE3E99D32227C898006E716B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE436C1522265E2600F93028;
+			remoteInfo = UIComponents;
+		};
+		CE3E99D52227C898006E716B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE436C1E22265E2600F93028;
+			remoteInfo = UIComponentsTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CE436C67222663CC00F93028 /* Embed Frameworks */ = {
@@ -24,7 +39,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CE436C66222663CC00F93028 /* UIComponents.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -34,12 +48,12 @@
 /* Begin PBXFileReference section */
 		CE1E9F222226A99A008CF41E /* TestSwipeImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSwipeImagePresenter.swift; sourceTree = "<group>"; };
 		CE1E9F252226AA6D008CF41E /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = uicomponents.xcodeproj; path = ../uicomponents/uicomponents.xcodeproj; sourceTree = "<group>"; };
 		CE436C4F222660CC00F93028 /* uipresentation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uipresentation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE436C52222660CC00F93028 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE436C59222660CD00F93028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE436C5C222660CD00F93028 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE436C5E222660CD00F93028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE436C64222663CC00F93028 /* UIComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE436C68222670B900F93028 /* TestPhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPhotoPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,17 +62,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE436C65222663CC00F93028 /* UIComponents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3E99CF2227C898006E716B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE3E99D42227C898006E716B /* UIComponents.framework */,
+				CE3E99D62227C898006E716B /* .xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CE436C46222660CC00F93028 = {
 			isa = PBXGroup;
 			children = (
-				CE436C64222663CC00F93028 /* UIComponents.framework */,
+				CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */,
 				CE436C51222660CC00F93028 /* uipresentation */,
 				CE436C50222660CC00F93028 /* Products */,
 			);
@@ -133,12 +155,35 @@
 			mainGroup = CE436C46222660CC00F93028;
 			productRefGroup = CE436C50222660CC00F93028 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CE3E99CF2227C898006E716B /* Products */;
+					ProjectRef = CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CE436C4E222660CC00F93028 /* uipresentation */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CE3E99D42227C898006E716B /* UIComponents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UIComponents.framework;
+			remoteRef = CE3E99D32227C898006E716B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE3E99D62227C898006E716B /* .xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = .xctest;
+			remoteRef = CE3E99D52227C898006E716B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CE436C4D222660CC00F93028 /* Resources */ = {
@@ -299,6 +344,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 44TGJLPAYN;
 				INFOPLIST_FILE = uipresentation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -316,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 44TGJLPAYN;
 				INFOPLIST_FILE = uipresentation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
