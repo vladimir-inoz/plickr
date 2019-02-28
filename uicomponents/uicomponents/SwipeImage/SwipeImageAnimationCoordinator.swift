@@ -2,7 +2,13 @@ import UIKit
 
 
 protocol SwipeImageAnimationCoordinatorDelegate {
-    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, beganTransitionWithDirection: SwipeImageAnimationCoordinator.AnimationDirection)
+    ///  Notify delegate about transition began
+    ///
+    /// - Parameters:
+    ///   - coordinator: the coordinator
+    ///   - beganTransitionWithDirection: direction of transition
+    /// - Returns: true if transition should start, false otherwise
+    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, beganTransitionWithDirection: SwipeImageAnimationCoordinator.AnimationDirection) -> Bool
     func coordinator(_ coordinator: SwipeImageAnimationCoordinator, finishedTransitionWithDirection: SwipeImageAnimationCoordinator.AnimationDirection)
 }
 /*
@@ -158,7 +164,10 @@ final class SwipeImageAnimationCoordinator {
         switch gestureState {
         case .began:
             initialAnimationDirection = AnimationDirection(fromVelocity: velocity)
-            delegate?.coordinator(self, beganTransitionWithDirection: initialAnimationDirection)
+            if let delegate = self.delegate {
+                let shouldHandleGesture = delegate.coordinator(self, beganTransitionWithDirection: initialAnimationDirection)
+                if !shouldHandleGesture { return }
+            }
             startInteractiveTransition(with: initialAnimationDirection, duration: 1.0)
         case .changed:
             updateInteractiveTransition(translation: translation, velocity: velocity)

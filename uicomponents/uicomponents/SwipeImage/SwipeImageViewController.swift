@@ -118,19 +118,24 @@ public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoor
     //MARK: - Animation Coordinator Delegate
 
     /// When we start pan gesture we pre-download corresponding image
-    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, beganTransitionWithDirection direction: SwipeImageAnimationCoordinator.AnimationDirection) {
+    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, beganTransitionWithDirection direction: SwipeImageAnimationCoordinator.AnimationDirection) -> Bool {
         switch direction {
         case .left:
-            print("left")
+            if !presenter.hasNextImage() { return false }
+            
             let prev = view.viewWithTag(tagsArray[0]) as! UIImageView
             prev.image = presenter.nextImage()
+            
+            return true
         case .right:
-            print("right")
+            if !presenter.hasPreviousImage() { return false }
+            
             let next = view.viewWithTag(tagsArray[2]) as! UIImageView
             next.image = presenter.previousImage()
-            break
+            
+            return true
         case .undefined:
-            break
+            return false
         }
     }
     
