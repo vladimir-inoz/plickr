@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CE1E9F232226A99A008CF41E /* TestSwipeImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E9F222226A99A008CF41E /* TestSwipeImagePresenter.swift */; };
 		CE1E9F262226AA6D008CF41E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E9F252226AA6D008CF41E /* Utils.swift */; };
+		CE3E99DA2227C9BC006E716B /* UIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3E99D42227C898006E716B /* UIComponents.framework */; };
+		CE3E99DB2227C9C0006E716B /* UIComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE3E99D42227C898006E716B /* UIComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE436C53222660CC00F93028 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE436C52222660CC00F93028 /* AppDelegate.swift */; };
 		CE436C5A222660CD00F93028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE436C59222660CD00F93028 /* Assets.xcassets */; };
 		CE436C5D222660CD00F93028 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE436C5B222660CD00F93028 /* LaunchScreen.storyboard */; };
@@ -30,6 +32,13 @@
 			remoteGlobalIDString = CE436C1E22265E2600F93028;
 			remoteInfo = UIComponentsTests;
 		};
+		CE3E99D72227C9B0006E716B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CE436C1422265E2600F93028;
+			remoteInfo = UIComponents;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CE3E99DB2227C9C0006E716B /* UIComponents.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3E99DA2227C9BC006E716B /* UIComponents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,12 +88,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CE3E99D92227C9BC006E716B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE436C46222660CC00F93028 = {
 			isa = PBXGroup;
 			children = (
 				CE3E99CE2227C898006E716B /* uicomponents.xcodeproj */,
 				CE436C51222660CC00F93028 /* uipresentation */,
 				CE436C50222660CC00F93028 /* Products */,
+				CE3E99D92227C9BC006E716B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +142,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CE3E99D82227C9B0006E716B /* PBXTargetDependency */,
 			);
 			name = uipresentation;
 			productName = uipresentation;
@@ -210,6 +230,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE3E99D82227C9B0006E716B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIComponents;
+			targetProxy = CE3E99D72227C9B0006E716B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CE436C5B222660CD00F93028 /* LaunchScreen.storyboard */ = {
