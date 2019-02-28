@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE1E9F1E2226A066008CF41E /* SwipeImageAnimationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E9F1D2226A066008CF41E /* SwipeImageAnimationCoordinator.swift */; };
 		CE1E9F242226A9DB008CF41E /* SwipeImageAnimationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E9F1D2226A066008CF41E /* SwipeImageAnimationCoordinator.swift */; };
+		CE3E99DD2227CAE9006E716B /* ImageActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E99DC2227CAE9006E716B /* ImageActivityView.swift */; };
 		CE436C1F22265E2600F93028 /* UIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE436C1522265E2600F93028 /* UIComponents.framework */; };
 		CE436C2422265E2600F93028 /* uicomponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE436C2322265E2600F93028 /* uicomponentsTests.swift */; };
 		CE436C2622265E2600F93028 /* uicomponents.h in Headers */ = {isa = PBXBuildFile; fileRef = CE436C1822265E2600F93028 /* uicomponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		CE1E9F1D2226A066008CF41E /* SwipeImageAnimationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeImageAnimationCoordinator.swift; sourceTree = "<group>"; };
+		CE3E99DC2227CAE9006E716B /* ImageActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageActivityView.swift; sourceTree = "<group>"; };
 		CE436C1522265E2600F93028 /* UIComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE436C1822265E2600F93028 /* uicomponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uicomponents.h; sourceTree = "<group>"; };
 		CE436C1922265E2600F93028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				CE436C1822265E2600F93028 /* uicomponents.h */,
 				CE436C3A22265ED100F93028 /* PhotosViewController.swift */,
+				CE3E99DC2227CAE9006E716B /* ImageActivityView.swift */,
 				CE1E9F1C2226A053008CF41E /* SwipeImage */,
 				CE436C4022265F3C00F93028 /* PhotoCollectionViewCell.swift */,
 				CE436C4322265F6700F93028 /* PhotoDataSource.swift */,
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE436C3B22265ED100F93028 /* PhotosViewController.swift in Sources */,
+				CE3E99DD2227CAE9006E716B /* ImageActivityView.swift in Sources */,
 				CE436C4422265F6700F93028 /* PhotoDataSource.swift in Sources */,
 				CE436C3E22265F0600F93028 /* SwipeImageViewController.swift in Sources */,
 				CE1E9F1E2226A066008CF41E /* SwipeImageAnimationCoordinator.swift in Sources */,
