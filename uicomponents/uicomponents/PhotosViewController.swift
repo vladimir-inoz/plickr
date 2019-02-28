@@ -9,6 +9,10 @@ public protocol PhotosViewPresenterProtocol: class {
     ///   - index: index of photo
     ///   - completion: new index of photo and photo result are returned in completion
     func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void)
+    /// User selected any cell
+    ///
+    /// - Parameter index: index of cell
+    func userSelectedIndex(index: Int)
 }
 
 public protocol PhotosViewProtocol: class {
@@ -65,5 +69,10 @@ public class PhotosViewController: UIViewController, UICollectionViewDelegate, P
                 photoCell.setImage(image: photo)
             }
         }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        presenter.userSelectedIndex(index: indexPath.row)
+        return true
     }
 }

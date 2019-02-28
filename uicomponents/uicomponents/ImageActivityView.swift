@@ -7,7 +7,8 @@ class ImageActivityView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageView = UIImageView(image: nil)
-        spinner = UIActivityIndicatorView(style: .gray)
+        imageView.contentMode = .scaleAspectFit
+        spinner = UIActivityIndicatorView(style: .whiteLarge)
         addSubview(imageView)
         addSubview(spinner)
         //spinner is centered at view

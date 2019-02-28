@@ -5,21 +5,29 @@ class TestSwipeImagePresenter: SwipeImageViewPresenterProtocol {
     private let minIndex = 5
     private var currentIndex = 10
     
-    func nextImage() -> UIImage? {
-        return Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0))
+    func getNextImage(completion: @escaping (UIImage?) -> Void) {
+        let delayTime = DispatchTime.now() + .seconds(2)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            completion(Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0)))
+        }
     }
     
-    func currentImage() -> UIImage? {
-        return Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0))
+    func getCurrentImage(completion: @escaping (UIImage?) -> Void) {
+        let delayTime = DispatchTime.now() + .seconds(2)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            completion(Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0)))
+        }
     }
     
-    func previousImage() -> UIImage? {
-        return Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0))
+    func getPreviousImage(completion: @escaping (UIImage?) -> Void) {
+        let delayTime = DispatchTime.now() + .seconds(2)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            completion(Utils.generateImage(withSize: CGSize(width: 50.0, height: 50.0)))
+        }
     }
     
     func hasNextImage() -> Bool {
         if currentIndex < maxIndex {
-            currentIndex = currentIndex + 1
             return true
         }
         
@@ -28,11 +36,18 @@ class TestSwipeImagePresenter: SwipeImageViewPresenterProtocol {
     
     func hasPreviousImage() -> Bool {
         if currentIndex > minIndex {
-            currentIndex = currentIndex - 1
             return true
         }
         
         return false
+    }
+    
+    func switchToNextImage() {
+        currentIndex = currentIndex + 1
+    }
+    
+    func switchToPreviousImage() {
+        currentIndex = currentIndex - 1
     }
     
     

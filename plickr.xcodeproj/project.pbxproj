@@ -15,6 +15,9 @@
 		CE6C7C53221BDE0A00DA9779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */; };
 		CE6C7C5A221BDE1B00DA9779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */; };
 		CE6C7C5D221BDE1C00DA9779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */; };
+		CEF2DE682227F4E50000A6BE /* SwipeImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2DE672227F4E50000A6BE /* SwipeImagePresenter.swift */; };
+		CEF2DE702227FB150000A6BE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2DE6F2227FB150000A6BE /* Router.swift */; };
+		CEF2DE722227FDEC0000A6BE /* MainTabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2DE712227FDEC0000A6BE /* MainTabBarControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,9 @@
 		CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE6C7C5C221BDE1C00DA9779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE6C7C5E221BDE1C00DA9779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEF2DE672227F4E50000A6BE /* SwipeImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeImagePresenter.swift; sourceTree = "<group>"; };
+		CEF2DE6F2227FB150000A6BE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		CEF2DE712227FDEC0000A6BE /* MainTabBarControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +141,10 @@
 			isa = PBXGroup;
 			children = (
 				CE186667222501D700E5803D /* PhotosViewPresenter.swift */,
+				CEF2DE6F2227FB150000A6BE /* Router.swift */,
+				CEF2DE672227F4E50000A6BE /* SwipeImagePresenter.swift */,
 				CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */,
+				CEF2DE712227FDEC0000A6BE /* MainTabBarControllerDelegate.swift */,
 				CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */,
 				CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */,
 				CE6C7C5E221BDE1C00DA9779 /* Info.plist */,
@@ -255,8 +264,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF2DE702227FB150000A6BE /* Router.swift in Sources */,
 				CE6C7C53221BDE0A00DA9779 /* AppDelegate.swift in Sources */,
 				CE186668222501D700E5803D /* PhotosViewPresenter.swift in Sources */,
+				CEF2DE682227F4E50000A6BE /* SwipeImagePresenter.swift in Sources */,
+				CEF2DE722227FDEC0000A6BE /* MainTabBarControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

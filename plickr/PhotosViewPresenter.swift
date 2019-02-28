@@ -1,11 +1,13 @@
 import Foundation
 import UIComponents
-import FetchPhotos
+import FlickrREST
 
 class PhotosViewPresenter: PhotosViewPresenterProtocol {
+    
     private let store: PhotoStore
     private let method: FlickrAPI.Method
     private var photos = [Photo]()
+    var router: Router?
     private unowned let view: PhotosViewProtocol
     
     init(view: PhotosViewProtocol, store: PhotoStore, method: FlickrAPI.Method) {
@@ -59,5 +61,9 @@ class PhotosViewPresenter: PhotosViewPresenterProtocol {
                 completion(actualPhotoIndex, nil)
             }
         }
+    }
+    
+    func userSelectedIndex(index: Int) {
+        router?.userSelectedIndex(in: self, index: index)
     }
 }

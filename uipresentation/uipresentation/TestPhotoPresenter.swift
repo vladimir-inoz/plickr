@@ -2,6 +2,7 @@ import UIKit
 import UIComponents
 
 class TestPhotoPresenter: PhotosViewPresenterProtocol {
+    
     /// generating dummy images filled with random coloe
     private let dummyImages: [UIImage] = {
         let range = 0...40
@@ -23,6 +24,10 @@ class TestPhotoPresenter: PhotosViewPresenterProtocol {
     
     func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void) {
         completion(index, dummyImages[index])
+    }
+    
+    func userSelectedIndex(index: Int) {
+        print("User selected index: \(index)")
     }
 }
 

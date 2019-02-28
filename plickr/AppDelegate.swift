@@ -1,6 +1,6 @@
 import UIKit
 import UIComponents
-import FetchPhotos
+import FlickrREST
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -11,20 +11,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+        
+        let router = Router()
+        
         let photoStore = PhotoStore()
         
         let interestingViewController = PhotosViewController()
         let interestingViewPresenter = PhotosViewPresenter(view: interestingViewController, store: photoStore, method: .interestingPhotos)
         interestingViewController.presenter = interestingViewPresenter
+        interestingViewPresenter.router = router
         interestingViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        interestingViewController.navigationItem.title = "Interesting"
+        
+        let interestingNavigationController = UINavigationController(rootViewController: interestingViewController)
+        
+        router.currentViewController = interestingViewController
         
         let recentViewController = PhotosViewController()
         let recentViewPresenter = PhotosViewPresenter(view: recentViewController, store: photoStore, method: .recentPhotos)
         recentViewController.presenter = recentViewPresenter
+        recentViewPresenter.router = router
         recentViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+        recentViewController.navigationItem.title = "Recent"
+        
+        let recentNavigationController = UINavigationController(rootViewController: recentViewController)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [interestingViewController, recentViewController]
+        tabBarController.viewControllers = [interestingNavigationController, recentNavigationController]
+        let delegate = MainTabBarControllerDelegate()
+        delegate.router = router
+        tabBarController.delegate = delegate
         window?.rootViewController = tabBarController
         return true
     }
