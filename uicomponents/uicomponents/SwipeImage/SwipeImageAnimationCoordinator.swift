@@ -65,8 +65,7 @@ final class SwipeImageAnimationCoordinator {
         //add completion to only first animator
         animators.first?.addCompletion {
             [unowned self] (position) -> Void in
-            //calling delegate
-            self.delegate?.coordinator(self, finishedTransitionWithDirection: self.initialAnimationDirection)
+            let direction = self.initialAnimationDirection
             //nulling directions
             self.initialAnimationDirection = .undefined
             //erasing progress when interrupted
@@ -77,6 +76,10 @@ final class SwipeImageAnimationCoordinator {
                 $0.finishAnimation(at: position)
             }
             self.animators.removeAll()
+            //calling delegate only if animation is completed in non-reversed state
+            if position == .end {
+                self.delegate?.coordinator(self, finishedTransitionWithDirection: direction)
+            }
         }
         
         //start animation

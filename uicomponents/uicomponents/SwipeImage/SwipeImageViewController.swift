@@ -14,41 +14,70 @@ public protocol SwipeImageView: class {
 
 public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoordinatorDelegate {
     
-    private var previousImageView: UIImageView!
-    private var imageView: UIImageView!
-    private var nextImageView: UIImageView!
+    private struct Tags {
+        private init() {}
+        static let previousImageViewTag = 5
+        static let currentImageViewTag = 10
+        static let nextImageViewTag = 15
+    }
+    
+    /// This array contains tags of image views in order that they are arranged on screen
+    /// So tagsArray[0] is previous image view, tagsArray[1] is current image view, tagsArray[2] is next image view
+    private var tagsArray = [Tags.previousImageViewTag, Tags.currentImageViewTag, Tags.nextImageViewTag]
     private var coordinator: SwipeImageAnimationCoordinator!
     public var presenter: SwipeImageViewPresenterProtocol!
     
+    private func switchTagsArray(direction: SwipeImageAnimationCoordinator.AnimationDirection) {
+        switch direction {
+        case .left:
+            let first = tagsArray.first!
+            tagsArray[0] = tagsArray[1]
+            tagsArray[1] = tagsArray[2]
+            tagsArray[2] = first
+        case .right:
+            let last = tagsArray.last!
+            tagsArray[2] = tagsArray[1]
+            tagsArray[1] = tagsArray[0]
+            tagsArray[0] = last
+        default:
+            break
+        }
+    }
+    
+    /// Rearrange image views to represent tags array
     private func rearrageImageViews() {
-        imageView.frame = view.bounds
-        previousImageView.frame = imageView.frame.offsetBy(dx: -view.bounds.width, dy: 0.0)
-        nextImageView.frame = imageView.frame.offsetBy(dx: view.bounds.width, dy: 0.0)
+        let prev: UIImageView = view.viewWithTag(tagsArray[0]) as! UIImageView
+        let current: UIImageView = view.viewWithTag(tagsArray[1]) as! UIImageView
+        let next: UIImageView = view.viewWithTag(tagsArray[2]) as! UIImageView
+        
+        current.frame = view.bounds
+        prev.frame = current.frame.offsetBy(dx: -view.bounds.width, dy: 0.0)
+        next.frame = current.frame.offsetBy(dx: view.bounds.width, dy: 0.0)
     }
     
     private func setup() {
-        imageView = UIImageView()
-        imageView.image = presenter.currentImage()
-        imageView.tag = 0
-        imageView.isUserInteractionEnabled = true
-        view.addSubview(imageView)
-        imageView.frame = view.bounds
+        let currentImageView = UIImageView()
+        currentImageView.image = presenter.currentImage()
+        currentImageView.tag = Tags.currentImageViewTag
+        currentImageView.isUserInteractionEnabled = true
+        view.addSubview(currentImageView)
+        currentImageView.frame = view.bounds
         
-        previousImageView = UIImageView()
+        let previousImageView = UIImageView()
         if presenter.hasPreviousImage() {
             previousImageView.image = presenter.previousImage()
         }
-        previousImageView.tag = 1
+        previousImageView.tag = Tags.previousImageViewTag
         view.addSubview(previousImageView)
-        previousImageView.frame = imageView.frame.offsetBy(dx: -view.bounds.width, dy: 0.0)
+        previousImageView.frame = currentImageView.frame.offsetBy(dx: -view.bounds.width, dy: 0.0)
         
-        nextImageView = UIImageView()
+        let nextImageView = UIImageView()
         if presenter.hasNextImage() {
             nextImageView.image = presenter.nextImage()
         }
-        previousImageView.tag = 2
+        nextImageView.tag = Tags.nextImageViewTag
         view.addSubview(nextImageView)
-        nextImageView.frame = imageView.frame.offsetBy(dx: view.bounds.width, dy: 0.0)
+        nextImageView.frame = currentImageView.frame.offsetBy(dx: view.bounds.width, dy: 0.0)
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(panGestureRecognizer)
@@ -57,15 +86,19 @@ public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoor
     }
     
     private func setupCoordinators() {
+        let prev: UIImageView = view.viewWithTag(tagsArray[0]) as! UIImageView
+        let current: UIImageView = view.viewWithTag(tagsArray[1]) as! UIImageView
+        let next: UIImageView = view.viewWithTag(tagsArray[2]) as! UIImageView
+        //in these animations we just shifting all three image views on the same offset
         let leftAnimation = { [unowned self] in
-            self.imageView.frame = self.imageView.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
-            self.previousImageView.frame = self.previousImageView.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
-            self.nextImageView.frame = self.nextImageView.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
+            current.frame = current.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
+            prev.frame = prev.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
+            next.frame = next.frame.offsetBy(dx: -self.view.bounds.width, dy: 0.0)
         }
         let rightAnimation = { [unowned self] in
-            self.imageView.frame = self.imageView.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
-            self.previousImageView.frame = self.previousImageView.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
-            self.nextImageView.frame = self.nextImageView.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
+            current.frame = current.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
+            prev.frame = prev.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
+            next.frame = next.frame.offsetBy(dx: self.view.bounds.width, dy: 0.0)
         }
         let easeInTimingParameters = UICubicTimingParameters(animationCurve: .easeIn)
         let parameters = SwipeImageAnimationCoordinator.AnimationParameters(leftAnimation: leftAnimation, rightAnimation: rightAnimation, timingParameters: easeInTimingParameters)
@@ -83,42 +116,27 @@ public class SwipeImageViewController: UIViewController, SwipeImageAnimationCoor
     }
     
     //MARK: - Animation Coordinator Delegate
-    
-    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, beganTransitionWithDirection: SwipeImageAnimationCoordinator.AnimationDirection) {
-        
-    }
-    
-    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, finishedTransitionWithDirection direction: SwipeImageAnimationCoordinator.AnimationDirection) {
-        let newCurrent: UIImageView
-        let newPrev: UIImageView
-        let newNext: UIImageView
-        //Depending on direction we rearrange image view and set corrent references to them
+
+    /// When we start pan gesture we pre-download corresponding image
+    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, beganTransitionWithDirection direction: SwipeImageAnimationCoordinator.AnimationDirection) {
         switch direction {
         case .left:
-            newCurrent = previousImageView
-            newNext = imageView
-            newPrev = nextImageView
-            
-            imageView = newCurrent
-            nextImageView = newNext
-            previousImageView = newPrev
-            
-            previousImageView.image = presenter.previousImage()
+            print("left")
+            let prev = view.viewWithTag(tagsArray[0]) as! UIImageView
+            prev.image = presenter.nextImage()
         case .right:
-            newCurrent = nextImageView
-            newNext = previousImageView
-            newPrev = imageView
-            
-            imageView = newCurrent
-            nextImageView = newNext
-            previousImageView = newPrev
-            
-            nextImageView.image = presenter.nextImage()
+            print("right")
+            let next = view.viewWithTag(tagsArray[2]) as! UIImageView
+            next.image = presenter.previousImage()
             break
         case .undefined:
             break
         }
-        
+    }
+    
+    func coordinator(_ coordinator: SwipeImageAnimationCoordinator, finishedTransitionWithDirection direction: SwipeImageAnimationCoordinator.AnimationDirection) {
+        //rearrange image views
+        switchTagsArray(direction: direction)
         rearrageImageViews()
     }
 }
