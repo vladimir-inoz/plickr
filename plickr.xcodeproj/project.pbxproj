@@ -15,9 +15,7 @@
 		CE6C7C53221BDE0A00DA9779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */; };
 		CE6C7C5A221BDE1B00DA9779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */; };
 		CE6C7C5D221BDE1C00DA9779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */; };
-		CEF2DE682227F4E50000A6BE /* SwipeImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2DE672227F4E50000A6BE /* SwipeImagePresenter.swift */; };
-		CEF2DE702227FB150000A6BE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2DE6F2227FB150000A6BE /* Router.swift */; };
-		CEF2DE722227FDEC0000A6BE /* MainTabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2DE712227FDEC0000A6BE /* MainTabBarControllerDelegate.swift */; };
+		E763DCAC229827A800294FE2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DCAB229827A700294FE2 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,9 +73,7 @@
 		CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE6C7C5C221BDE1C00DA9779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE6C7C5E221BDE1C00DA9779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEF2DE672227F4E50000A6BE /* SwipeImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeImagePresenter.swift; sourceTree = "<group>"; };
-		CEF2DE6F2227FB150000A6BE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		CEF2DE712227FDEC0000A6BE /* MainTabBarControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarControllerDelegate.swift; sourceTree = "<group>"; };
+		E763DCAB229827A700294FE2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,11 +136,9 @@
 		CE6C7C51221BDE0A00DA9779 /* plickr */ = {
 			isa = PBXGroup;
 			children = (
+				E763DCAB229827A700294FE2 /* Router.swift */,
 				CE186667222501D700E5803D /* PhotosViewPresenter.swift */,
-				CEF2DE6F2227FB150000A6BE /* Router.swift */,
-				CEF2DE672227F4E50000A6BE /* SwipeImagePresenter.swift */,
 				CE6C7C52221BDE0A00DA9779 /* AppDelegate.swift */,
-				CEF2DE712227FDEC0000A6BE /* MainTabBarControllerDelegate.swift */,
 				CE6C7C59221BDE1B00DA9779 /* Assets.xcassets */,
 				CE6C7C5B221BDE1C00DA9779 /* LaunchScreen.storyboard */,
 				CE6C7C5E221BDE1C00DA9779 /* Info.plist */,
@@ -163,6 +157,7 @@
 				CE6C7C4C221BDE0A00DA9779 /* Frameworks */,
 				CE6C7C4D221BDE0A00DA9779 /* Resources */,
 				CE18664D221FD4C100E5803D /* Embed Frameworks */,
+				E763DCA62298215E00294FE2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -259,16 +254,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E763DCA62298215E00294FE2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE6C7C4B221BDE0A00DA9779 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEF2DE702227FB150000A6BE /* Router.swift in Sources */,
+				E763DCAC229827A800294FE2 /* Router.swift in Sources */,
 				CE6C7C53221BDE0A00DA9779 /* AppDelegate.swift in Sources */,
 				CE186668222501D700E5803D /* PhotosViewPresenter.swift in Sources */,
-				CEF2DE682227F4E50000A6BE /* SwipeImagePresenter.swift in Sources */,
-				CEF2DE722227FDEC0000A6BE /* MainTabBarControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

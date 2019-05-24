@@ -4,7 +4,7 @@ import UIKit
 /// or a spinner if image does not exist
 class PhotoCollectionViewCell: UICollectionViewCell {
     var imageActivityView: ImageActivityView!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageActivityView = ImageActivityView(frame: CGRect.zero)
@@ -18,21 +18,21 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         //show up spinner
         imageActivityView.setImage(image: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         imageActivityView.setImage(image: nil)
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         imageActivityView.setImage(image: nil)
     }
-    
+
     func setImage(image: UIImage?) {
         imageActivityView.setImage(image: image)
     }

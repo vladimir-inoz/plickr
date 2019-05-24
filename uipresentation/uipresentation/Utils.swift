@@ -11,7 +11,7 @@ extension UIColor {
 
 struct Utils {
     private init() {}
-    
+
     static func generateImage(withSize size: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         let image = renderer.image { (context) in

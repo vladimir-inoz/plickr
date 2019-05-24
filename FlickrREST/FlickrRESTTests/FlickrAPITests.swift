@@ -19,7 +19,7 @@ class FlickrAPITests: XCTestCase {
         { \"id\": \"47206811831\", \"owner\": \"152925019@N02\", \"secret\": \"27797abbc5\", \"server\": \"7800\", \"farm\": 8, \"title\": \"Apparel Attire\", \"ispublic\": 1, \"isfriend\": 0, \"isfamily\": 0, \"datetaken\": \"2019-02-25 02:52:51\", \"datetakengranularity\": 0,      \"datetakenunknown\": 1, \"url_h\": \"https://farm8.staticflickr.com/7800/47206811831_21d64d7686_h.jpg\", \"height_h\": \"1600\",    \"width_h\": \"1043\" }
         ] }, \"stat\": \"ok\" }
         """
-        
+
         let photosResult = FlickrAPI.photos(fromJSON: jsonResponse.data(using: .utf8)!)
         if case let .success(photos) = photosResult {
             XCTAssertEqual(photos.count, 2)
@@ -35,7 +35,8 @@ class FlickrAPITests: XCTestCase {
             components.second = 29
             XCTAssertEqual(photos[0].dateTaken, components.date!)
             XCTAssertEqual(photos[0].photoID, "46483455004")
-            XCTAssertEqual(photos[0].remoteURL.absoluteString, "https://farm8.staticflickr.com/7844/46483455004_058cf8b6a8_h.jpg")
+            XCTAssertEqual(photos[0].remoteURL.absoluteString,
+                           "https://farm8.staticflickr.com/7844/46483455004_058cf8b6a8_h.jpg")
             XCTAssertEqual(photos[0].title, "0022658_Adm vs Innsbruck")
             //second photo
             components.year = 2019
@@ -46,13 +47,14 @@ class FlickrAPITests: XCTestCase {
             components.second = 51
             XCTAssertEqual(photos[1].dateTaken, components.date!)
             XCTAssertEqual(photos[1].photoID, "47206811831")
-            XCTAssertEqual(photos[1].remoteURL.absoluteString, "https://farm8.staticflickr.com/7800/47206811831_21d64d7686_h.jpg")
+            XCTAssertEqual(photos[1].remoteURL.absoluteString,
+                           "https://farm8.staticflickr.com/7800/47206811831_21d64d7686_h.jpg")
             XCTAssertEqual(photos[1].title, "Apparel Attire")
         } else {
             XCTFail("failure on parsing")
         }
     }
-    
+
     /// Here we provide json data without required fields
     func testPhotoGenerationPartialFail() {
         let jsonResponse = """
@@ -62,7 +64,7 @@ class FlickrAPITests: XCTestCase {
         { \"id\": \"47206811831\", \"owner\": \"152925019@N02\", \"secret\": \"27797abbc5\", \"server\": \"7800\", \"farm\": 8, \"ispublic\": 1, \"isfriend\": 0, \"isfamily\": 0, \"datetaken\": \"2019-02-25 02:52:51\", \"datetakengranularity\": 0,      \"datetakenunknown\": 1, \"url_h\": \"https://farm8.staticflickr.com/7800/47206811831_21d64d7686_h.jpg\", \"height_h\": \"1600\",    \"width_h\": \"1043\" }
         ] }, \"stat\": \"ok\" }
         """
-        
+
         let photosResult = FlickrAPI.photos(fromJSON: jsonResponse.data(using: .utf8)!)
         if case let .failure(error) = photosResult {
             XCTAssertTrue(error is FlickrAPI.FlickrError)
@@ -73,10 +75,10 @@ class FlickrAPITests: XCTestCase {
             XCTFail("Provided json response is invalid")
         }
     }
-    
+
     func testPhotoGenerationFail() {
         let jsonResponse = "{}"
-        
+
         let photosResult = FlickrAPI.photos(fromJSON: jsonResponse.data(using: .utf8)!)
         if case let .failure(error) = photosResult {
             XCTAssertTrue(error is FlickrAPI.FlickrError)

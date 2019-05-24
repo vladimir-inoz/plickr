@@ -3,7 +3,7 @@ import UIKit
 class ImageActivityView: UIView {
     var imageView: UIImageView!
     var spinner: UIActivityIndicatorView!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageView = UIImageView(image: nil)
@@ -24,16 +24,16 @@ class ImageActivityView: UIView {
         //show up spinner
         setImage(image: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setImage(image: nil)
     }
-    
+
     func setImage(image: UIImage?) {
         if let imageToDisplay = image {
             spinner.stopAnimating()

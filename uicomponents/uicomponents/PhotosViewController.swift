@@ -23,18 +23,22 @@ public protocol PhotosViewProtocol: class {
 public class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosViewProtocol {
     private var collectionView: UICollectionView!
     private let dataSource = PhotoDataSource()
+    public var flowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 90.0, height: 90.0)
+        layout.minimumLineSpacing = 10.0
+        layout.minimumInteritemSpacing = 10.0
+        layout.sectionInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        return layout
+    }()
+
     public var presenter: PhotosViewPresenterProtocol! = nil {
         didSet {
             dataSource.presenter = presenter
         }
     }
-    
+
     func setup() {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 90.0, height: 90.0)
-        flowLayout.minimumLineSpacing = 10.0
-        flowLayout.minimumInteritemSpacing = 10.0
-        flowLayout.sectionInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.dataSource = dataSource
@@ -47,30 +51,30 @@ public class PhotosViewController: UIViewController, UICollectionViewDelegate, P
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
     }
-    
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         setup()
         presenter.reloadPhotosFromServer()
     }
-    
-    //MARK: - Photos View protocol
-    
+
+    // MARK: - Photos View protocol
+
     public func reload() {
         collectionView.reloadSections(IndexSet(integer: 0))
     }
-    
-    //MARK: - Collection view delegate
+
+    // MARK: - Collection view delegate
 
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.fetchImageForIndex(index: indexPath.row) {
-            (indexRow, photo) in
+            (_, photo) in
             if let photoCell = cell as? PhotoCollectionViewCell {
                 photoCell.setImage(image: photo)
             }
         }
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         presenter.userSelectedIndex(index: indexPath.row)
         return true
