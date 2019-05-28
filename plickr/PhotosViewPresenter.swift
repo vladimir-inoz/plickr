@@ -57,12 +57,12 @@ class PhotosViewPresenter: PhotosViewPresenterProtocol {
             }
         }
     }
-    
+
     func userSelectedIndex(index: Int) {
         guard let routable = view as? DetailedPhotoRoute else {
             return
         }
-        
-        routable.openDetailedPhoto(photoStore: store, method: method)
+
+        routable.openDetailedPhoto(photoStore: store, method: method, index: index)
     }
 }

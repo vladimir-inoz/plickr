@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         controller.presenter = presenter
         controller.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         controller.navigationItem.title = "Interesting"
-        return UINavigationController(rootViewController: controller)
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.view.backgroundColor = UIColor.white
+        return navigationController
     }()
 
     private lazy var recentPhotosController: UIViewController = {
@@ -27,10 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         controller.presenter = presenter
         controller.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
         controller.navigationItem.title = "Recent"
-        return UINavigationController(rootViewController: controller)
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.view.backgroundColor = UIColor.white
+        return navigationController
     }()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 

@@ -18,13 +18,15 @@ public protocol PhotosViewPresenterProtocol: class {
 public protocol PhotosViewProtocol: class {
     /// Reload corresponding view
     func reload()
+    /// Scroll to item at index
+    var initialItem: Int? { get set }
 }
 
-public class PhotosViewController: UIViewController, PhotosViewProtocol {
+public class PhotosViewController: UIViewController {
     public enum LayoutType {
         case grid, page
     }
-    
+
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: CGRect.zero, collectionViewLayout: gridLayout)
         view.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
@@ -33,9 +35,7 @@ public class PhotosViewController: UIViewController, PhotosViewProtocol {
         view.backgroundColor = UIColor.white
         return view
     }()
-    
-    private let dataSource = PhotoDataSource()
-    
+
     private let gridLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 90.0, height: 90.0)
@@ -54,13 +54,16 @@ public class PhotosViewController: UIViewController, PhotosViewProtocol {
         layout.minimumLineSpacing = 0.0
         return layout
     }()
+    
+    private let dataSource = PhotoDataSource()
+    public var initialItem: Int?
 
     public var presenter: PhotosViewPresenterProtocol! = nil {
         didSet {
             dataSource.presenter = presenter
         }
     }
-    
+
     public var layoutType: LayoutType = .grid {
         didSet {
             switch layoutType {
@@ -84,14 +87,26 @@ public class PhotosViewController: UIViewController, PhotosViewProtocol {
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
     }
 
+    override public func loadView() {
+        super.loadView()
+        view.backgroundColor = UIColor.white
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         setup()
         presenter.reloadPhotosFromServer()
     }
 
-    // MARK: - Photos View protocol
+    override public func viewDidLayoutSubviews() {
+        if let index = initialItem, index < presenter.photosCount {
+            let indexPath = IndexPath(item: index, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        }
+    }
+}
 
+extension PhotosViewController: PhotosViewProtocol {
     public func reload() {
         collectionView.reloadSections(IndexSet(integer: 0))
     }
@@ -99,9 +114,11 @@ public class PhotosViewController: UIViewController, PhotosViewProtocol {
 
 extension PhotosViewController: UICollectionViewDelegate {
 
-    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        presenter.fetchImageForIndex(index: indexPath.row) {
-            (_, photo) in
+    public func collectionView(_ collectionView: UICollectionView,
+                               willDisplay cell: UICollectionViewCell,
+                               forItemAt indexPath: IndexPath) {
+
+        presenter.fetchImageForIndex(index: indexPath.row) { (_, photo) in
             if let photoCell = cell as? PhotoCollectionViewCell {
                 photoCell.setImage(image: photo)
             }
