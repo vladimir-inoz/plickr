@@ -14,10 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let photosVC = PhotosViewController()
         let photosPresenter = TestPhotoPresenter()
         photosVC.presenter = photosPresenter
-        photosVC.tabBarItem = UITabBarItem(title: "Photos", image: nil, selectedImage: nil)
+        photosVC.tabBarItem = UITabBarItem(title: "Grid", image: nil, selectedImage: nil)
+        
+        let pagePhotosController = PhotosViewController()
+        pagePhotosController.layoutType = .page
+        pagePhotosController.presenter = photosPresenter
+        pagePhotosController.tabBarItem = UITabBarItem(title: "Page", image: nil, selectedImage: nil)
 
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [photosVC]
+        tabBarController.viewControllers = [photosVC, pagePhotosController]
         window?.rootViewController = tabBarController
         return true
     }

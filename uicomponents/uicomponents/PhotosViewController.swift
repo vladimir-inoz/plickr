@@ -20,15 +20,38 @@ public protocol PhotosViewProtocol: class {
     func reload()
 }
 
-public class PhotosViewController: UIViewController, UICollectionViewDelegate, PhotosViewProtocol {
-    private var collectionView: UICollectionView!
+public class PhotosViewController: UIViewController, PhotosViewProtocol {
+    public enum LayoutType {
+        case grid, page
+    }
+    
+    private lazy var collectionView: UICollectionView = {
+        let view = UICollectionView(frame: CGRect.zero, collectionViewLayout: gridLayout)
+        view.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        view.dataSource = dataSource
+        view.delegate = self
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
     private let dataSource = PhotoDataSource()
-    public var flowLayout: UICollectionViewFlowLayout = {
+    
+    private let gridLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 90.0, height: 90.0)
         layout.minimumLineSpacing = 10.0
         layout.minimumInteritemSpacing = 10.0
         layout.sectionInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        return layout
+    }()
+    private let pageLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let size = UIScreen.main.bounds.size.width
+        layout.itemSize = CGSize(width: size, height: size)
+        layout.estimatedItemSize = layout.itemSize
+        layout.minimumInteritemSpacing = 0.0
+        layout.minimumLineSpacing = 0.0
         return layout
     }()
 
@@ -37,13 +60,22 @@ public class PhotosViewController: UIViewController, UICollectionViewDelegate, P
             dataSource.presenter = presenter
         }
     }
+    
+    public var layoutType: LayoutType = .grid {
+        didSet {
+            switch layoutType {
+            case .grid:
+                collectionView.isPagingEnabled = false
+                collectionView.collectionViewLayout = gridLayout
+            case .page:
+                collectionView.isPagingEnabled = true
+                collectionView.clipsToBounds = false
+                collectionView.collectionViewLayout = pageLayout
+            }
+        }
+    }
 
     func setup() {
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.dataSource = dataSource
-        collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.white
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -63,8 +95,9 @@ public class PhotosViewController: UIViewController, UICollectionViewDelegate, P
     public func reload() {
         collectionView.reloadSections(IndexSet(integer: 0))
     }
+}
 
-    // MARK: - Collection view delegate
+extension PhotosViewController: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.fetchImageForIndex(index: indexPath.row) {
@@ -79,4 +112,5 @@ public class PhotosViewController: UIViewController, UICollectionViewDelegate, P
         presenter.userSelectedIndex(index: indexPath.row)
         return true
     }
+
 }

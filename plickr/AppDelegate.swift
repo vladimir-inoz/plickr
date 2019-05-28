@@ -7,14 +7,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private let router = Router()
     private let photoStore = PhotoStore()
     private lazy var interestingPhotosController: UIViewController = {
         let controller = PhotosViewController()
         let presenter = PhotosViewPresenter(view: controller,
                                             store: photoStore,
                                             method: .interestingPhotos)
-        presenter.router = router
         controller.presenter = presenter
         controller.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         controller.navigationItem.title = "Interesting"
@@ -27,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             store: photoStore,
                                             method: .recentPhotos)
         controller.presenter = presenter
-        presenter.router = router
         controller.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
         controller.navigationItem.title = "Recent"
         return UINavigationController(rootViewController: controller)

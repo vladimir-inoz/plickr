@@ -1,3 +1,3 @@
 struct Secret {
-    static let APIKey = "Enter your key here"
+    static let APIKey = "Enter API Key here"
 }

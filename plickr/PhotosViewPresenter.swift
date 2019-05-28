@@ -3,11 +3,9 @@ import UIComponents
 import FlickrREST
 
 class PhotosViewPresenter: PhotosViewPresenterProtocol {
-
     private let store: PhotoStore
     private let method: FlickrAPI.Method
     private var photos = [Photo]()
-    var router: Router?
     private unowned let view: PhotosViewProtocol
 
     init(view: PhotosViewProtocol, store: PhotoStore, method: FlickrAPI.Method) {
@@ -41,15 +39,12 @@ class PhotosViewPresenter: PhotosViewPresenterProtocol {
     }
 
     var photosCount: Int {
-        get {
-            return photos.count
-        }
+        return photos.count
     }
 
     func fetchImageForIndex(index: Int, completion: @escaping (Int, UIImage?) -> Void) {
         let photo = photos[index]
-        store.fetchImage(for: photo) {
-            imageResult in
+        store.fetchImage(for: photo) { imageResult in
 
             guard let actualPhotoIndex = self.photos.lastIndex(where: {return $0 == photo}) else {
                 return
@@ -62,7 +57,12 @@ class PhotosViewPresenter: PhotosViewPresenterProtocol {
             }
         }
     }
-
+    
     func userSelectedIndex(index: Int) {
+        guard let routable = view as? DetailedPhotoRoute else {
+            return
+        }
+        
+        routable.openDetailedPhoto(photoStore: store, method: method)
     }
 }

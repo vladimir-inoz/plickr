@@ -43,7 +43,7 @@ public struct FlickrAPI {
             let photoID = json["id"] as? String,
             let title = json["title"] as? String,
             let dateString = json["datetaken"] as? String,
-            let photoURLString = json["url_sq"] as? String,
+            let photoURLString = json["url_c"] as? String,
             let url = URL(string: photoURLString),
             let dateTaken = dateFormatter.date(from: dateString) else {
                 return nil
@@ -53,11 +53,11 @@ public struct FlickrAPI {
     }
 
     static var interestingPhotosURL: URL {
-        return flickrURL(method: .interestingPhotos, parameters: ["extras": "url_sq,date_taken"])
+        return flickrURL(method: .interestingPhotos, parameters: ["extras": "url_c,date_taken"])
     }
 
     static var recentPhotosURL: URL {
-        return flickrURL(method: .recentPhotos, parameters: ["extras": "url_sq,date_taken"])
+        return flickrURL(method: .recentPhotos, parameters: ["extras": "url_c,date_taken"])
     }
 
     public static func photos(fromJSON data: Data) -> PhotosResult {
